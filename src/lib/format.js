@@ -34,3 +34,12 @@ export const timeAgo = (d) => {
   if (s < 86400) return `${Math.floor(s / 3600)} h ago`;
   return date(d);
 };
+
+/** Compact time for tables: "10:25 pm" for today, "11 Oct" for older dates. */
+export const shortTime = (d) => {
+  if (!d) return '—';
+  const t = new Date(d);
+  return t.toDateString() === new Date().toDateString()
+    ? t.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })
+    : t.toLocaleDateString('en-IN', { day: '2-digit', month: 'short' });
+};
